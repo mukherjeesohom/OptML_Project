@@ -1,6 +1,6 @@
 from utility.loading_bar import LoadingBar
 import time
-
+from typing import Tuple
 
 class Log:
     def __init__(self, log_each: int, initial_epoch=-1):
@@ -8,6 +8,10 @@ class Log:
         self.best_accuracy = 0.0
         self.log_each = log_each
         self.epoch = initial_epoch
+        self.current_loss = 0.0
+        self.current_accuracy = 0.0
+        self.current_valid_loss = 0.0
+        self.current_valid_accuracy = 0.0
 
     def train(self, len_dataset: int) -> None:
         self.epoch += 1
@@ -20,10 +24,11 @@ class Log:
         self.last_steps_state = {"loss": 0.0, "accuracy": 0.0, "steps": 0}
         self._reset(len_dataset)
 
-    def eval(self, len_dataset: int) -> None:
+    def eval(self, len_dataset: int) -> Tuple[float, float]:
         self.flush()
         self.is_train = False
         self._reset(len_dataset)
+        return self.current_loss, self.current_accuracy
 
     def __call__(self, model, loss, accuracy, learning_rate: float = None) -> None:
         if self.is_train:
@@ -41,6 +46,8 @@ class Log:
                 end="",
                 flush=True,
             )
+            self.current_accuracy = round(accuracy*100, 2)
+            self.current_loss = round(loss, 4)
 
         else:
             loss = self.epoch_state["loss"] / self.epoch_state["steps"]
@@ -50,6 +57,10 @@ class Log:
 
             if accuracy > self.best_accuracy:
                 self.best_accuracy = accuracy
+            
+            self.current_valid_loss = round(loss, 4)
+            self.current_valid_accuracy = round(accuracy*100, 2)
+        
 
     def _train_step(self, model, loss, accuracy, learning_rate: float) -> None:
         self.learning_rate = learning_rate
