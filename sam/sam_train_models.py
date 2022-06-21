@@ -446,8 +446,9 @@ if __name__ == "__main__":
                         optimizer.second_step(zero_grad=True)
 
                         with torch.no_grad():
+                            per_batch_sharpness = sharpness_accum/idx
                             correct = torch.argmax(predictions.data, 1) == targets
-                            log(model, loss.cpu(), correct.cpu(), sharpness_accum/idx)
+                            log(model, loss.cpu(), correct.cpu(), per_batch_sharpness)
                             scheduler(epoch)
 
                     model.eval()
