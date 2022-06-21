@@ -51,9 +51,9 @@ class Log:
         self._reset(len_dataset)
         return self.current_loss, self.current_accuracy
 
-    def __call__(self, model, loss, accuracy, learning_rate: float = None) -> None:
+    def __call__(self, model, loss, accuracy, sharpness_value: float = None) -> None:
         if self.is_train:
-            self._train_step(model, loss, accuracy, learning_rate)
+            self._train_step(model, loss, accuracy, sharpness_value)
         else:
             self._eval_step(loss, accuracy)
 
@@ -63,7 +63,7 @@ class Log:
             accuracy = self.epoch_state["accuracy"] / self.epoch_state["steps"]
 
             print(
-                f"\r┃{self.epoch:12d}  ┃{loss:12.4f}  │{100*accuracy:10.2f} %  ┃{self.learning_rate:12.3e}  │{self._time():>12}  ┃",
+                f"\r┃{self.epoch:12d}  ┃{loss:12.4f}  │{100*accuracy:10.2f} %  ┃{self.sharpness:12.3e}  │{self._time():>12}  ┃",
                 end="",
                 flush=True,
             )
@@ -81,10 +81,9 @@ class Log:
             
             self.current_valid_loss = round(loss, 4)
             self.current_valid_accuracy = round(accuracy*100, 2)
-        
 
-    def _train_step(self, model, loss, accuracy, learning_rate: float) -> None:
-        self.learning_rate = learning_rate
+    def _train_step(self, model, loss, accuracy, sharpness_value: float) -> None:
+        self.sharpness = sharpness_value
         self.last_steps_state["loss"] += loss.sum().item()
         self.last_steps_state["accuracy"] += accuracy.sum().item()
         self.last_steps_state["steps"] += loss.size(0)
@@ -101,7 +100,7 @@ class Log:
             progress = self.step / self.len_dataset
 
             print(
-                f"\r┃{self.epoch:12d}  ┃{loss:12.4f}  │{100*accuracy:10.2f} %  ┃{learning_rate:12.3e}  │{self._time():>12}  {self.loading_bar(progress)}",
+                f"\r┃{self.epoch:12d}  ┃{loss:12.4f}  │{100*accuracy:10.2f} %  ┃{self.sharpness:12.3e}  │{self._time():>12}  {self.loading_bar(progress)}",
                 end="",
                 flush=True,
             )
@@ -389,10 +388,10 @@ def smooth_crossentropy(pred, gold, smoothing=0.1):
 
 
 if __name__ == "__main__":
-    models = ['VGG16', 'ResNet18']
+    models = ['ResNet18', 'VGG16']
     seeds = [0, 1, 2]
-    opts = ['sgd', 'adam']
-    adaptive =  True
+    opts = ['adam', 'sgd']
+    adaptive = True
     batch_size = 128
     depth = 16
     dropout = 0.0
@@ -404,8 +403,8 @@ if __name__ == "__main__":
     rho = 2.0
     weight_decay = 0.0005
     width_factor = 8
-    for model_name in models:
-        for seed in seeds:
+    for seed in seeds:
+        for model_name in models:
             for opt in opts:
                 initialize(seed=seed)
                 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -423,6 +422,7 @@ if __name__ == "__main__":
                 train_accuracy = np.zeros(epochs)
                 val_losses = np.zeros(epochs)
                 val_accuracy = np.zeros(epochs)
+                sharpness = np.zeros(epochs)
 
                 for epoch in range(epochs):
                     model.train()
@@ -452,6 +452,7 @@ if __name__ == "__main__":
                             scheduler(epoch)
 
                     model.eval()
+                    sharpness[epoch] = log.sharpness
                     cur_loss, cur_acc = log.eval(len_dataset=len(dataset.test))
                     train_losses[epoch] = cur_loss
                     train_accuracy[epoch] = cur_acc
@@ -477,5 +478,6 @@ if __name__ == "__main__":
                 with open(f'{opt}_sam_{model_name}_seed{seed}.npy', 'wb') as numpy_file:
                     np.save(numpy_file, train_losses)
                     np.save(numpy_file, train_accuracy)
+                    np.save(numpy_file, sharpness)
                     np.save(numpy_file, val_losses)
                     np.save(numpy_file, val_accuracy)
