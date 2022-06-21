@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-
 import torch
 import numpy as np
 import time
@@ -125,7 +124,7 @@ class Log:
     def _print_header(self) -> None:
         print(f"┏━━━━━━━━━━━━━━┳━━━━━━━╸T╺╸R╺╸A╺╸I╺╸N╺━━━━━━━┳━━━━━━━╸S╺╸T╺╸A╺╸T╺╸S╺━━━━━━━┳━━━━━━━╸V╺╸A╺╸L╺╸I╺╸D╺━━━━━━━┓")
         print(f"┃              ┃              ╷              ┃              ╷              ┃              ╷              ┃")
-        print(f"┃       epoch  ┃        loss  │    accuracy  ┃        l.r.  │     elapsed  ┃        loss  │    accuracy  ┃")
+        print(f"┃       epoch  ┃        loss  │    accuracy  ┃   sharpness  │     elapsed  ┃        loss  │    accuracy  ┃")
         print(f"┠──────────────╂──────────────┼──────────────╂──────────────┼──────────────╂──────────────┼──────────────┨")
 
 
@@ -164,12 +163,14 @@ class SAM(torch.optim.Optimizer):
 
         self.base_optimizer = base_optimizer(self.param_groups, **kwargs)
         self.param_groups = self.base_optimizer.param_groups
+        self.sharpness = 0
 
     @torch.no_grad()
     def first_step(self, zero_grad=False):
         grad_norm = self._grad_norm()
         for group in self.param_groups:
             scale = group["rho"] / (grad_norm + 1e-12)
+            self.sharpness = group["rho"] * (grad_norm)
 
             for p in group["params"]:
                 if p.grad is None: continue
@@ -414,8 +415,8 @@ if __name__ == "__main__":
                 log = Log(log_each=10)
                 model = ResNet18(num_classes=10).to(device) if model_name == 'ResNet18' else VGG('VGG16').to(device)
 
-                base_optimizer = torch.optim.Adam if opt=='adam' else torch.optim.SGD
-                optimizer = SAM(model.parameters(), base_optimizer, rho=rho, adaptive=adaptive, lr=learning_rate, weight_decay=weight_decay) if opt=='adam' else SAM(model.parameters(), base_optimizer, rho=rho, adaptive=adaptive, lr=learning_rate, momentum=momentum, weight_decay=weight_decay)
+                base_optimizer = torch.optim.Adam if opt == 'adam' else torch.optim.SGD
+                optimizer = SAM(model.parameters(), base_optimizer, rho=rho, adaptive=adaptive, lr=learning_rate, weight_decay=weight_decay)
                 scheduler = StepLR(optimizer, learning_rate, epochs)
 
                 train_losses = np.zeros(epochs)
@@ -427,7 +428,8 @@ if __name__ == "__main__":
                     model.train()
                     log.train(len_dataset=len(dataset.train))
 
-                    for batch in dataset.train:
+                    sharpness_accum = 0
+                    for idx, batch in enumerate(dataset.train):
                         inputs, targets = (b.to(device) for b in batch)
 
                         # first forward-backward step
@@ -436,6 +438,7 @@ if __name__ == "__main__":
                         loss = smooth_crossentropy(predictions, targets, smoothing=label_smoothing)
                         loss.mean().backward()
                         optimizer.first_step(zero_grad=True)
+                        sharpness_accum += optimizer.sharpness
 
                         # second forward-backward step
                         disable_running_stats(model)
@@ -444,7 +447,7 @@ if __name__ == "__main__":
 
                         with torch.no_grad():
                             correct = torch.argmax(predictions.data, 1) == targets
-                            log(model, loss.cpu(), correct.cpu(), scheduler.lr())
+                            log(model, loss.cpu(), correct.cpu(), sharpness_accum/idx)
                             scheduler(epoch)
 
                     model.eval()
@@ -469,7 +472,7 @@ if __name__ == "__main__":
                 val_losses[epochs-1] = log.current_valid_loss
                 val_accuracy[epochs-1] = log.current_valid_accuracy
 
-                torch.save(model.state_dict(), f'{opt}_sam_{model_name}_seed{seed}.ckpt')
+                torch.save(model.state_dict(), f'{opt}_sam_{model_name}_seed{seed}.pt')
                 with open(f'{opt}_sam_{model_name}_seed{seed}.npy', 'wb') as f:
                     np.save(f, train_losses)
                     np.save(f, train_accuracy)
