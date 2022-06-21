@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+
 import torch
 import numpy as np
 import time
@@ -413,8 +414,8 @@ if __name__ == "__main__":
                 log = Log(log_each=10)
                 model = ResNet18(num_classes=10).to(device) if model_name == 'ResNet18' else VGG('VGG16').to(device)
 
-                base_optimizer = torch.optim.Adam if opt == 'adam' else torch.optim.SGD
-                optimizer = SAM(model.parameters(), base_optimizer, rho=rho, adaptive=adaptive, lr=learning_rate, weight_decay=weight_decay)
+                base_optimizer = torch.optim.Adam if opt=='adam' else torch.optim.SGD
+                optimizer = SAM(model.parameters(), base_optimizer, rho=rho, adaptive=adaptive, lr=learning_rate, weight_decay=weight_decay) if opt=='adam' else SAM(model.parameters(), base_optimizer, rho=rho, adaptive=adaptive, lr=learning_rate, momentum=momentum, weight_decay=weight_decay)
                 scheduler = StepLR(optimizer, learning_rate, epochs)
 
                 train_losses = np.zeros(epochs)
