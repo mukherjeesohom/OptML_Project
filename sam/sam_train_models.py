@@ -399,7 +399,7 @@ if __name__ == "__main__":
     epochs = 200
     label_smoothing = 0.1
     learning_rate = 0.001
-    momentum= 0.9
+    momentum = 0.9
     threads = 5
     rho = 2.0
     weight_decay = 0.0005
@@ -416,7 +416,7 @@ if __name__ == "__main__":
                 model = ResNet18(num_classes=10).to(device) if model_name == 'ResNet18' else VGG('VGG16').to(device)
 
                 base_optimizer = torch.optim.Adam if opt == 'adam' else torch.optim.SGD
-                optimizer = SAM(model.parameters(), base_optimizer, rho=rho, adaptive=adaptive, lr=learning_rate, weight_decay=weight_decay)
+                optimizer = SAM(model.parameters(), base_optimizer, rho=rho, adaptive=adaptive, lr=learning_rate, weight_decay=weight_decay) if opt=='adam' else SAM(model.parameters(), base_optimizer, rho=rho, adaptive=adaptive, lr=learning_rate, weight_decay=weight_decay, momentum=momentum)
                 scheduler = StepLR(optimizer, learning_rate, epochs)
 
                 train_losses = np.zeros(epochs)
@@ -474,8 +474,8 @@ if __name__ == "__main__":
                 val_accuracy[epochs-1] = log.current_valid_accuracy
 
                 torch.save(model.state_dict(), f'{opt}_sam_{model_name}_seed{seed}.pt')
-                with open(f'{opt}_sam_{model_name}_seed{seed}.npy', 'wb') as f:
-                    np.save(f, train_losses)
-                    np.save(f, train_accuracy)
-                    np.save(f, val_losses)
-                    np.save(f, val_accuracy)
+                with open(f'{opt}_sam_{model_name}_seed{seed}.npy', 'wb') as numpy_file:
+                    np.save(numpy_file, train_losses)
+                    np.save(numpy_file, train_accuracy)
+                    np.save(numpy_file, val_losses)
+                    np.save(numpy_file, val_accuracy)
