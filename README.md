@@ -44,3 +44,7 @@ Cifar-10 (https://www.cs.toronto.edu/~kriz/cifar.html)
 2. Torchvision
 3. Cuda (if available)
 
+## Code Structure:
+1. Baseline Code: Training and optimization without SAM- shared at the link:
+2. SAM Code: Training and optimization with SAM- shared at the link:
+
