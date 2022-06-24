@@ -10,10 +10,12 @@ Generalization refers to a model's ability to adapt properly to new, previously 
 ### 2. Optimization:
 Optimization is the process where we train the model iteratively that results in a maximum and minimum function evaluation.
 
-### 3. Sharpness/ Flatness: The sharpness of loss function can be defined as the difference between the maximum training loss and the generalization loss at the same point at the x-axis.
+### 3. Sharpness/ Flatness: 
+The sharpness of loss function can be defined as the difference between the maximum training loss and the generalization loss at the same point at the x-axis.
 ![image](https://user-images.githubusercontent.com/21705597/175521022-a43d5c96-c474-4105-91ed-370f7a60cd0d.png)
 
 
-### 4. Sharpness Aware Minimisation (SAM): Sharpness-Aware Minimization, or SAM, is a procedure that improves model generalization by simultaneously minimizing loss value and loss sharpness. 
+### 4. Sharpness Aware Minimisation (SAM): 
+Sharpness-Aware Minimization, or SAM, is a procedure that improves model generalization by simultaneously minimizing loss value and loss sharpness. 
 
 
