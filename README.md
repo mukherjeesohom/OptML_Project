@@ -12,6 +12,7 @@ Optimization is the process where we train the model iteratively that results in
 
 ### 3. Sharpness/ Flatness: 
 The sharpness of loss function can be defined as the difference between the maximum training loss and the generalization loss at the same point at the x-axis.
+
 ![image](https://user-images.githubusercontent.com/21705597/175521022-a43d5c96-c474-4105-91ed-370f7a60cd0d.png)
 
 
