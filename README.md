@@ -43,9 +43,14 @@ Cifar-10 (https://www.cs.toronto.edu/~kriz/cifar.html)
 1. Pytorch: https://pytorch.org/get-started/locally/
 2. Torchvision
 3. matplotlib
-4. Cuda (if available)
+4. Cuda (if available); not required if you run the codes in Google Colab
+5. Anaconda Jupyter Notebook(https://www.anaconda.com/)/ Google Colab (https://colab.research.google.com/)
 
 ## Code Structure:
 1. **Baseline Code:** Training and optimization without SAM- shared at the link:
 2. **SAM Code:** Training and optimization with SAM- shared at the link:
+
+## Running the Codes:
+One can download the codes from the previous links and run them using Jupyter Notebook or Google Colab
+
 
