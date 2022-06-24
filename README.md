@@ -53,4 +53,8 @@ Cifar-10 (https://www.cs.toronto.edu/~kriz/cifar.html)
 ## Running the Codes:
 One can download the codes from the previous links and run them using Jupyter Notebook or Google Colab
 
+## Results:
+
+The models and numpy arrays (containing train loss, train accuracy, validation loss and validation accuracy) are stored in the Google Drive link: https://drive.google.com/drive/folders/1OHBn2H5YkTv_3-dH91hsj9mdSPdAUFhV?usp=sharing
+
 
