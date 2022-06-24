@@ -42,7 +42,8 @@ Cifar-10 (https://www.cs.toronto.edu/~kriz/cifar.html)
 ### Requirements:
 1. Pytorch: https://pytorch.org/get-started/locally/
 2. Torchvision
-3. Cuda (if available)
+3. matplotlib
+4. Cuda (if available)
 
 ## Code Structure:
 1. **Baseline Code:** Training and optimization without SAM- shared at the link:
