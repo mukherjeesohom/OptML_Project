@@ -57,4 +57,20 @@ One can download the codes from the previous links and run them using Jupyter No
 
 The models and numpy arrays (containing train loss, train accuracy, validation loss and validation accuracy) are stored in the Google Drive link: https://drive.google.com/drive/folders/1OHBn2H5YkTv_3-dH91hsj9mdSPdAUFhV?usp=sharing
 
+The said link also contains the plots that we have got from our experiments.
+
+In the table given below, we have given the mean test validation accuracy for our all experiments:
+
+![image](https://user-images.githubusercontent.com/21705597/175814509-635575e0-30c4-448f-a3af-8260f4f3ac28.png)
+
+## Contributors:
+1. [Sohom Mukherjee](https://github.com/mukherjeesohom) (Student Number: 7010515)
+2. 
+3. [Zubayr Khalid](https://github.com/zubayr1) (Student Number: 7003003)
+
+
+## Acknowledgement:
+We would like to acknowledge the following code repositories on which our code is based:
+
+[Loss Landscape](https://github.com/tomgoldstein/loss-landscape)
 
