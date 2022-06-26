@@ -65,7 +65,7 @@ In the table given below, we have given the mean test validation accuracy for ou
 
 ## Contributors:
 1. [Sohom Mukherjee](https://github.com/mukherjeesohom) (Student Number: 7010515)
-2. 
+2. [Enosh Peter Ponraj](https://github.com/Enosh-P) (Student Number: 7012171)
 3. [Zubayr Khalid](https://github.com/zubayr1) (Student Number: 7003003)
 
 
