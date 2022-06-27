@@ -6,7 +6,7 @@ In this project we analyse the loss landscape geometry of adaptive optimization 
 </p>
 
 <p align = "center">
-Fig.1 - 4K Mountains Wallpaper
+Figure 1. Schematic diagram showing intuition behind sharpness-aware minimization. Adapted from [2].
 </p>
 
 ### Requirements
