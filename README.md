@@ -17,16 +17,16 @@ In this project we analyse the loss landscape geometry of adaptive optimization 
 
 ### a. Baseline
 ```
-python./baseline/baseline.py
+python ./baseline/baseline.py
 ```
 
 ### b. SAM
 ```
-python./sam/sam_train_models.py
+python ./sam/sam_train_models.py
 ```
 
 ### c. Plotting
-The plots are obtained from the `.npy` files saved from the previous steps using the notebook `plotting.ipynb`. 
+The plots are obtained from the `.npy` files saved from the previous steps using the notebook `plotting.ipynb`.
 
 ## Results
 
