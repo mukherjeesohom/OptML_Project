@@ -1,4 +1,4 @@
-# OptML_Project: Study on Loss Landscape Geometry for Improving Generalization in Adaptive Optimization Methods
+Study on Loss Landscape Geometry for Improving Generalization in Adaptive Optimization Methods
 In this project we analyse the loss landscape geometry of adaptive optimization methods, using a measure of loss landscape curvature called sharpness. It is well known that flat minima are associated with better generalization. Improved methods that aid convergence of adaptive methods, namely ADAM, to flat minima are proposed, for improving their generalization.
 
 
@@ -40,11 +40,12 @@ In this project we are trying to compare the sharpness of the minima for a model
 Cifar-10 (https://www.cs.toronto.edu/~kriz/cifar.html)
 
 ### Requirements:
-1. Pytorch: https://pytorch.org/get-started/locally/
-2. Torchvision
-3. matplotlib
-4. Cuda (if available); not required if you run the codes in Google Colab
-5. Anaconda Jupyter Notebook(https://www.anaconda.com/)/ Google Colab (https://colab.research.google.com/)
+1. Python 3.6
+2. Pytorch
+3. Torchvision
+4. matplotlib
+5. CUDA (if available); not required if you run the codes in Google Colab
+
 
 ## Code Structure:
 1. **Baseline Code:** Training and optimization without SAM- shared at the link:
