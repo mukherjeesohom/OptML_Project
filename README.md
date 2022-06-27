@@ -1,4 +1,4 @@
-Study on Loss Landscape Geometry for Improving Generalization in Adaptive Optimization Methods
+#Study on Loss Landscape Geometry for Improving Generalization in Adaptive Optimization Methods
 In this project we analyse the loss landscape geometry of adaptive optimization methods, using a measure of loss landscape curvature called sharpness. It is well known that flat minima are associated with better generalization. Improved methods that aid convergence of adaptive methods, namely ADAM, to flat minima are proposed, for improving their generalization.
 
 
