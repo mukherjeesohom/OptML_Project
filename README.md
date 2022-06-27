@@ -17,7 +17,7 @@ The sharpness of loss function can be defined as the difference between the maxi
 ![image](https://user-images.githubusercontent.com/21705597/175521022-a43d5c96-c474-4105-91ed-370f7a60cd0d.png)
 
 <p align="center">
-  <img width="460" height="300" src="[http://www.fillmurray.com/460/300](https://user-images.githubusercontent.com/21705597/175521022-a43d5c96-c474-4105-91ed-370f7a60cd0d.png)">
+  <img width="460" height="300" src="https://user-images.githubusercontent.com/21705597/175521022-a43d5c96-c474-4105-91ed-370f7a60cd0d.png">
 </p>
 
 
