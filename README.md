@@ -10,14 +10,23 @@ In this project we analyse the loss landscape geometry of adaptive optimization 
 2. PyTorch
 3. Torchvision
 4. Matplotlib
-5. CUDA (if available); not required if you run the codes in Google Colab
+5. CUDA (if available)
 
 
 ## Experiments
 
+### a. Baseline
 ```
-sss
+python./baseline/baseline.py
 ```
+
+### b. SAM
+```
+python./sam/sam_train_models.py
+```
+
+### c. Plotting
+The plots are obtained from the `.npy` files saved from the previous steps using the notebook `plotting.ipynb`. 
 
 ## Results
 
