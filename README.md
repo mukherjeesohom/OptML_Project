@@ -6,7 +6,7 @@ In this project we analyse the loss landscape geometry of adaptive optimization 
 </p>
 
 <p align = "center">
-Figure 1. Schematic diagram showing intuition behind sharpness-aware minimization. Adapted from [1].
+Figure 1. Schematic diagram showing intuition behind sharp and flat minima and generalization. Adapted from [1].
 </p>
 
 ### Requirements
@@ -55,3 +55,5 @@ We would like to acknowledge the following code repositories on which our code i
 - [loss-landscape](https://github.com/tomgoldstein/loss-landscape)
 - [sam](https://github.com/davda54/sam)
 
+## References
+[1] Jungmin Kwon, Jeongseop Kim. ASAM: Adaptive Sharpness-Aware Minimization for Scale-Invariant Learning of Deep Neural Networks. November 04, 2021. [blog](https://research.samsung.com/blog/ASAM-Adaptive-Sharpness-Aware-Minimization-for-Scale-Invariant-Learning-of-Deep-Neural-Networks)
