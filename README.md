@@ -5,6 +5,10 @@ In this project we analyse the loss landscape geometry of adaptive optimization 
   <img width="600" height="250" src="https://user-images.githubusercontent.com/21705597/175521022-a43d5c96-c474-4105-91ed-370f7a60cd0d.png">
 </p>
 
+<p align = "center">
+Fig.1 - 4K Mountains Wallpaper
+</p>
+
 ### Requirements
 1. Python 3.6
 2. PyTorch
