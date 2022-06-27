@@ -16,6 +16,10 @@ The sharpness of loss function can be defined as the difference between the maxi
 
 ![image](https://user-images.githubusercontent.com/21705597/175521022-a43d5c96-c474-4105-91ed-370f7a60cd0d.png)
 
+<p align="center">
+  <img width="460" height="300" src="[http://www.fillmurray.com/460/300](https://user-images.githubusercontent.com/21705597/175521022-a43d5c96-c474-4105-91ed-370f7a60cd0d.png)">
+</p>
+
 
 ### 4. Sharpness Aware Minimisation (SAM): 
 Sharpness-Aware Minimization, or SAM, is a procedure that improves model generalization by simultaneously minimizing loss value and loss sharpness. 
@@ -56,11 +60,7 @@ One can download the codes from the previous links and run them using Jupyter No
 
 ## Results:
 
-The models and numpy arrays (containing train loss, train accuracy, validation loss and validation accuracy) are stored in the Google Drive link: https://drive.google.com/drive/folders/1OHBn2H5YkTv_3-dH91hsj9mdSPdAUFhV?usp=sharing
-
-The said link also contains the plots that we have got from our experiments.
-
-In the table given below, we have given the mean test validation accuracy for our all experiments:
+The trained models and numpy arrays of metrics (containing train loss, train accuracy, test loss, test accuracy, and sharpness values versus epochs) are stored in this Google Drive [link](https://drive.google.com/drive/folders/1OHBn2H5YkTv_3-dH91hsj9mdSPdAUFhV?usp=sharing). The plots generated from our experiments are also included in this link. In the table given below, we report the mean and standard deviation of test accuracy for all setups.
 
 | Optimizer/Architecture | ResNet18 | VGG16 |
 |---|---|---|
@@ -69,14 +69,15 @@ In the table given below, we have given the mean test validation accuracy for ou
 | ADAM | 92.716 $\pm$ 0.247 | 92.173 $\pm$ 0.310 |
 | ADAM+SAM | 94.896 $\pm$ 0.160 | 94.126 $\pm$ 0.112 |
 
-## Contributors:
+## Contributors
 1. [Sohom Mukherjee](https://github.com/mukherjeesohom) (Student Number: 7010515)
 2. [Enosh Peter Ponraj](https://github.com/Enosh-P) (Student Number: 7012171)
 3. [Zubayr Khalid](https://github.com/zubayr1) (Student Number: 7003003)
 
 
-## Acknowledgement:
+## Acknowledgement
 We would like to acknowledge the following code repositories on which our code is based:
 
-[Loss Landscape](https://github.com/tomgoldstein/loss-landscape)
+- [loss-landscape](https://github.com/tomgoldstein/loss-landscape)
+- [sam](https://github.com/davda54/sam)
 
