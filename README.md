@@ -61,7 +61,12 @@ The said link also contains the plots that we have got from our experiments.
 
 In the table given below, we have given the mean test validation accuracy for our all experiments:
 
-![image](https://user-images.githubusercontent.com/21705597/175814509-635575e0-30c4-448f-a3af-8260f4f3ac28.png)
+| Optimizer/Architecture | ResNet18 | VGG16 |
+|---|---|---|
+| SGD | 90.899 $\pm$ 0.137 | 90.089 $\pm$ 0.070 |
+| SGD+SAM | 91.873 $\pm$ 0.102 | 90.453 $\pm$ 0.066 |
+| ADAM | 92.716 $\pm$ 0.247 | 92.173 $\pm$ 0.310 |
+| ADAM+SAM | 94.896 $\pm$ 0.160 | 94.126 $\pm$ 0.112 |
 
 ## Contributors:
 1. [Sohom Mukherjee](https://github.com/mukherjeesohom) (Student Number: 7010515)
