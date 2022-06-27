@@ -3,6 +3,7 @@ In this project we analyse the loss landscape geometry of adaptive optimization 
 
 <p align="center">
   <img width="600" height="250" src="https://user-images.githubusercontent.com/21705597/175521022-a43d5c96-c474-4105-91ed-370f7a60cd0d.png">
+  <em>image_caption</em>
 </p>
 
 ### Requirements
